@@ -68,6 +68,7 @@ module Padrino
       app.set :auth_error_message,   "Could not log you in."
       app.set :auth_success_message, "You have logged in successfully."
       app.set :auth_login_template, 'sessions/login'
+      app.set :auth_login_layout, 'layouts/layout'
       # OAuth Specific Settings
       app.set :auth_use_oauth, false
       
@@ -92,7 +93,7 @@ module Padrino
             session[:request_token_secret] = @auth_oauth_request_token.secret
             redirect @auth_oauth_request_token.authorize_url
           else
-            render settings.auth_login_template
+            render settings.auth_login_template, :layout => settings.auth_login_layout
           end
         end
 
